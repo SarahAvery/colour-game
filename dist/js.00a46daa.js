@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+})({"../../../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -149,7 +149,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],"../../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+},{}],"../../../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -184,18 +184,111 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"resources/sass/main.scss":[function(require,module,exports) {
+},{"./bundle-url":"../../../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"resources/scss/main.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"js/index.js":[function(require,module,exports) {
+},{"_css_loader":"../../../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"js/index.js":[function(require,module,exports) {
 "use strict";
 
-require("../resources/sass/main");
+require("../resources/scss/main");
 
-console.log("Hello");
-},{"../resources/sass/main":"resources/sass/main.scss"}],"../../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var colorTitle = document.getElementById("color");
+var resetBtn = document.getElementById("reset");
+var numSquares = 6;
+var colors = [];
+var squares = document.querySelectorAll(".square");
+var message = document.getElementById("message");
+var pickedColor;
+var containerColor = document.getElementById("container");
+init();
+
+function init() {
+  colorTitle.innerHTML = makeColor();
+  setupSquares();
+  resetGame();
+} // Reset Button
+
+
+resetBtn.addEventListener("click", function () {
+  resetGame();
+});
+
+function setupSquares() {
+  for (var i = 0; i < squares.length; i++) {
+    squares[i].style.backgroundColor = colors[i];
+    squares[i].addEventListener("click", function () {
+      var clickedColor = this.style.backgroundColor;
+
+      if (clickedColor === pickedColor) {
+        message.textContent = "Correct!";
+        resetBtn.textContent = "Play Again?";
+        changeColors(pickedColor);
+
+        for (var i = 0; i < squares.length; i++) {
+          squares[i].style.border = "none";
+        }
+
+        containerColor.style.backgroundColor = pickedColor;
+        containerColor.style.border = "1px solid black";
+      } else {
+        this.style.backgroundColor = containerColor.style.backgroundColor;
+        this.style.border = "none";
+        message.textContent = "Pick Again";
+      }
+    });
+  }
+}
+
+function resetGame() {
+  colors = genRandomColors(numSquares);
+  pickedColor = chooseColor();
+  colorTitle.textContent = pickedColor;
+  containerColor.style.backgroundColor = "rgb(245, 227, 227)";
+  containerColor.style.border = "none";
+  resetBtn.textContent = "New Colours";
+  message.textContent = "";
+
+  for (var i = 0; i < squares.length; i++) {
+    if (colors[i]) {
+      squares[i].style.display = "block";
+      squares[i].style.backgroundColor = colors[i];
+      squares[i].style.border = "1px solid black";
+    } else {
+      squares[i].style.border = "none";
+    }
+  }
+}
+
+function changeColors(color) {
+  for (var i = 0; i < squares.length; i++) {
+    squares[i].style.backgroundColor = color;
+  }
+}
+
+function chooseColor() {
+  var random = Math.floor(Math.random() * colors.length);
+  return colors[random];
+}
+
+function genRandomColors(num) {
+  var arr = [];
+
+  for (var i = 0; i < num; i++) {
+    arr.push(makeColor());
+  }
+
+  return arr;
+}
+
+function makeColor() {
+  var r = Math.floor(Math.random() * 256);
+  var g = Math.floor(Math.random() * 256);
+  var b = Math.floor(Math.random() * 256);
+  return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+},{"../resources/scss/main":"resources/scss/main.scss"}],"../../../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -223,7 +316,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52699" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54628" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -399,5 +492,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/index.js"], null)
+},{}]},{},["../../../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/index.js"], null)
 //# sourceMappingURL=/js.00a46daa.js.map
